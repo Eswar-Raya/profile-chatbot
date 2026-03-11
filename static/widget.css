@@ -36,8 +36,27 @@
 }
 
 #profile-chat-toggle svg {
-  width: 26px;
-  height: 26px;
+  width: 36px;
+  height: 36px;
+  transform-origin: 50% 90%;
+  animation: profile-chat-mascot-bob 1.8s ease-in-out infinite;
+}
+
+#profile-chat-mascot-arm {
+  transform-origin: 0px 0px;
+  animation: profile-chat-mascot-wave 1.2s ease-in-out infinite;
+}
+
+@keyframes profile-chat-mascot-wave {
+  0% { transform: translate(44px,32px) rotate(10deg); }
+  35% { transform: translate(44px,32px) rotate(-18deg); }
+  70% { transform: translate(44px,32px) rotate(14deg); }
+  100% { transform: translate(44px,32px) rotate(10deg); }
+}
+
+@keyframes profile-chat-mascot-bob {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-2px); }
 }
 
 /* Chat panel - smaller, opens above icon without covering nav */
@@ -102,12 +121,14 @@
 }
 
 #profile-chat-suggestions {
-  padding: 10px 12px 0;
+  padding: 10px 12px 2px;
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 8px;
   background: #fff;
   border-top: 1px solid #e5e7eb;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 #profile-chat-suggestions .chip {
@@ -119,10 +140,19 @@
   font-size: 12px;
   font-weight: 600;
   cursor: pointer;
+  white-space: nowrap;
 }
 
 #profile-chat-suggestions .chip:hover {
   background: rgba(46, 79, 130, 0.1);
+}
+
+.profile-chat-link {
+  color: #2E4F82;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  word-break: break-word;
 }
 
 #profile-chat-messages .msg {
