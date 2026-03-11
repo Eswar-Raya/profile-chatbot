@@ -10,7 +10,13 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
 
+from openai import APIError, RateLimitError
+
 from agent import ProfileChatAgent, load_profile, USE_OLLAMA
+
+FRIENDLY_QUOTA_MESSAGE = (
+    "I'm temporarily unable to answer; please try again in a little while."
+)
 
 # CORS: allow your website(s) to call the API. Use * for any origin, or set env WIDGET_ORIGINS.
 WIDGET_ORIGINS = os.getenv("WIDGET_ORIGINS", "*").split(",")
@@ -74,7 +80,16 @@ def chat(req: ChatRequest):
         agent = get_agent()
         reply = agent.chat_with_history(req.history, req.message.strip())
         return ChatResponse(reply=reply)
+    except RateLimitError:
+        return ChatResponse(reply=FRIENDLY_QUOTA_MESSAGE)
+    except APIError as e:
+        if e.status_code == 429 or (e.body and "quota" in str(e.body).lower()):
+            return ChatResponse(reply=FRIENDLY_QUOTA_MESSAGE)
+        raise HTTPException(status_code=500, detail=str(e))
     except Exception as e:
+        err_str = str(e).lower()
+        if "429" in err_str or "quota" in err_str or "insufficient_quota" in err_str:
+            return ChatResponse(reply=FRIENDLY_QUOTA_MESSAGE)
         raise HTTPException(status_code=500, detail=str(e))
 
 
