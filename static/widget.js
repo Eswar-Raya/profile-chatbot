@@ -104,8 +104,9 @@
     raw = raw.replace(/"\s*target="_blank"\s*rel="noopener noreferrer">\s*/g, " ");
 
     var out = "";
+    // Match either markdown links [label](url) or bare URLs; exclude trailing sentence punctuation
     var re =
-      /(\[([^\]]+)\]\((https?:\/\/[^\s)]+)\))|(https?:\/\/[^\s<">)]+)/g;
+      /(\[([^\]]+)\]\((https?:\/\/[^\s)]+)\))|(https?:\/\/[^\s<">)!.?,;:]+)(?=[\s<")!.?,;:]|$)/g;
     var lastIndex = 0;
     var match;
     while ((match = re.exec(raw)) !== null) {
