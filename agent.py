@@ -91,7 +91,9 @@ Response length policy (important):
 - If asked how to contact, provide the Contact page link.
 
 Style:
-- If you want to invite follow-ups, address the visitor explicitly (e.g. "If you'd like, ask about Eswar's experience at DXC.")."""
+- If you want to invite follow-ups, address the visitor explicitly (e.g. "If you'd like, ask about Eswar's experience at DXC.").
+- Never output HTML (no tags, no attributes like target=_blank). Use plain text only.
+- When you include a link, do NOT use brackets or markdown like [text](url). Use a short label followed by the URL on the same line, e.g. "Experience: https://eswarrayavarapu.com/experience"."""
 
 
 def _create_client():

@@ -98,37 +98,40 @@
   }
 
   function linkifySafe(text) {
-    var html = escapeHtml(text);
+    var raw = String(text || "");
 
-    // Convert markdown links: [label](https://example.com)
-    html = html.replace(
-      /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g,
-      function (_, label, url) {
-        return (
+    // Some model outputs accidentally paste anchor attributes. Strip the common pattern.
+    raw = raw.replace(/"\s*target="_blank"\s*rel="noopener noreferrer">\s*/g, " ");
+
+    var out = "";
+    var re =
+      /(\[([^\]]+)\]\((https?:\/\/[^\s)]+)\))|(https?:\/\/[^\s<">)]+)/g;
+    var lastIndex = 0;
+    var match;
+    while ((match = re.exec(raw)) !== null) {
+      out += escapeHtml(raw.slice(lastIndex, match.index));
+      if (match[3]) {
+        var label = match[2] || match[3];
+        var url1 = match[3];
+        out +=
           '<a class="profile-chat-link" href="' +
-          url +
+          escapeHtml(url1) +
           '" target="_blank" rel="noopener noreferrer">' +
           escapeHtml(label) +
-          "</a>"
-        );
-      }
-    );
-
-    // Convert bare URLs into links
-    html = html.replace(
-      /(https?:\/\/[^\s<">)]+)(?=[\s<")]|$)/g,
-      function (url) {
-        return (
+          "</a>";
+      } else if (match[4]) {
+        var url2 = match[4];
+        out +=
           '<a class="profile-chat-link" href="' +
-          url +
+          escapeHtml(url2) +
           '" target="_blank" rel="noopener noreferrer">' +
-          url +
-          "</a>"
-        );
+          escapeHtml(url2) +
+          "</a>";
       }
-    );
-
-    return html;
+      lastIndex = re.lastIndex;
+    }
+    out += escapeHtml(raw.slice(lastIndex));
+    return out;
   }
 
   function mascotSvgMarkup() {
