@@ -33,7 +33,6 @@
     '<div id="profile-chat-panel">' +
     '<div id="profile-chat-header">Ask about my profile <button type="button" id="profile-chat-close" aria-label="Close">×</button></div>' +
     '<div id="profile-chat-messages"></div>' +
-    '<div id="profile-chat-suggestions" aria-label="Suggested actions"></div>' +
     '<div id="profile-chat-input-wrap">' +
     '<form id="profile-chat-input-form">' +
     '<textarea id="profile-chat-input" rows="1" placeholder="Ask anything about my profile..." autocomplete="off"></textarea>' +
@@ -54,7 +53,6 @@
   var toggle = document.getElementById("profile-chat-toggle");
   var closeBtn = document.getElementById("profile-chat-close");
   var messagesEl = document.getElementById("profile-chat-messages");
-  var suggestionsEl = document.getElementById("profile-chat-suggestions");
   var form = document.getElementById("profile-chat-input-form");
   var input = document.getElementById("profile-chat-input");
   var sendBtn = document.getElementById("profile-chat-send");
@@ -115,11 +113,36 @@
     return html;
   }
 
+  function mascotSvgMarkup() {
+    // Same SVG as the button mascot, smaller for message avatars.
+    return (
+      '<svg viewBox="0 0 64 64" aria-hidden="true">' +
+      '<defs><linearGradient id="pc-hood-mini" x1="0" y1="0" x2="1" y2="1">' +
+      '<stop offset="0" stop-color="#EAF0F7"/>' +
+      '<stop offset="1" stop-color="#CFE0F5"/>' +
+      "</linearGradient></defs>" +
+      '<g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">' +
+      '<path d="M18 30c1-12 10-20 14-20h0c4 0 13 8 14 20" fill="url(#pc-hood-mini)" opacity="0.95"/>' +
+      '<circle cx="32" cy="30" r="10" fill="rgba(255,255,255,0.18)"/>' +
+      '<circle cx="28" cy="30" r="1.2" fill="currentColor" stroke="none"/>' +
+      '<circle cx="36" cy="30" r="1.2" fill="currentColor" stroke="none"/>' +
+      '<path d="M29 35c2 2 4 2 6 0" opacity="0.9"/>' +
+      "</g></svg>"
+    );
+  }
+
   function addMessage(role, content, isThinking) {
     var div = document.createElement("div");
     div.className = "msg " + (isThinking ? "thinking" : role);
     if (role === "assistant" && !isThinking) {
-      div.innerHTML = linkifySafe(content);
+      div.classList.add("with-avatar");
+      div.innerHTML =
+        '<span class="avatar" aria-hidden="true">' +
+        mascotSvgMarkup() +
+        "</span>" +
+        '<span class="bubble">' +
+        linkifySafe(content) +
+        "</span>";
     } else {
       div.textContent = content;
     }
@@ -128,34 +151,6 @@
     return div;
   }
 
-  function renderSuggestions() {
-    if (!suggestionsEl) return;
-    suggestionsEl.innerHTML = "";
-
-    var items = [
-      { type: "link", label: "Experience →", href: "https://eswarrayavarapu.com/experience" },
-      { type: "link", label: "Programs →", href: "https://eswarrayavarapu.com/projects" },
-      { type: "link", label: "Contact →", href: "https://eswarrayavarapu.com/contact" },
-    ];
-
-    items.forEach(function (item) {
-      var btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = "chip";
-      btn.textContent = item.label;
-      btn.addEventListener("click", function () {
-        if (item.type === "link") {
-          window.open(item.href, "_blank", "noopener,noreferrer");
-          return;
-        }
-        if (item.type === "ask") {
-          input.value = item.text;
-          form.requestSubmit();
-        }
-      });
-      suggestionsEl.appendChild(btn);
-    });
-  }
 
   function setThinking(show) {
     sendBtn.disabled = show;
@@ -201,8 +196,6 @@
         addMessage("assistant", "Sorry, something went wrong. " + (err.message || "Please try again."));
       });
   });
-
-  renderSuggestions();
 
   /* Enter sends message; Shift+Enter adds new line */
   input.addEventListener("keydown", function (e) {
