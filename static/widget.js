@@ -104,9 +104,9 @@
     raw = raw.replace(/"\s*target="_blank"\s*rel="noopener noreferrer">\s*/g, " ");
 
     var out = "";
-    // Match either markdown links [label](url) or bare URLs; exclude trailing sentence punctuation
+    // Match either markdown links [label](url) or bare URLs
     var re =
-      /(\[([^\]]+)\]\((https?:\/\/[^\s)]+)\))|(https?:\/\/[^\s<">)!.?,;:]+)(?=[\s<")!.?,;:]|$)/g;
+      /(\[([^\]]+)\]\((https?:\/\/[^\s)]+)\))|(https?:\/\/[^\s<")]+)/g;
     var lastIndex = 0;
     var match;
     while ((match = re.exec(raw)) !== null) {
@@ -121,13 +121,16 @@
           escapeHtml(label) +
           "</a>";
       } else if (match[4]) {
-        var url2 = match[4];
+        var urlFull = match[4];
+        var url2 = urlFull.replace(/[.,!?;:]+$/g, "");
+        var trailing = urlFull.slice(url2.length);
         out +=
           '<a class="profile-chat-link" href="' +
           escapeHtml(url2) +
           '" target="_blank" rel="noopener noreferrer">' +
           escapeHtml(url2) +
-          "</a>";
+          "</a>" +
+          escapeHtml(trailing);
       }
       lastIndex = re.lastIndex;
     }
