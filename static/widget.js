@@ -9,25 +9,43 @@
   root.id = "profile-chat-root";
   root.innerHTML =
     '<button type="button" id="profile-chat-toggle" aria-label="Ask about my profile">' +
-    '<svg id="profile-chat-mascot" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
-    '<circle cx="32" cy="18" r="10" fill="rgba(255,255,255,0.18)" stroke="currentColor"/>' +
-    '<path d="M22 18c3-3 17-3 20 0" opacity="0.9"/>' +
-    '<path d="M24 22h0" />' +
-    '<path d="M40 22h0" />' +
-    '<path d="M32 28c-3 0-6-2-6-2" opacity="0.85"/>' +
-    '<path d="M32 28c3 0 6-2 6-2" opacity="0.85"/>' +
-    '<path d="M32 28v2" opacity="0.6"/>' +
-    '<path d="M32 28c0 4-4 6-8 6" opacity="0.6"/>' +
-    '<path d="M32 28c0 4 4 6 8 6" opacity="0.6"/>' +
-    '<path d="M32 28c0 6 0 10 0 14" />' +
-    '<path d="M22 38c4-6 16-6 20 0" opacity="0.8"/>' +
-    '<path d="M24 54c4-10 12-10 16 0" opacity="0.65"/>' +
-    '<g id="profile-chat-mascot-arm" transform="translate(44,32)">' +
-    '<path d="M0 0c6 2 10 6 12 10" />' +
-    '<path d="M12 10l4-2" />' +
-    '<path d="M12 10l2 4" />' +
+    '<svg id="profile-chat-mascot" viewBox="0 0 72 72" aria-hidden="true">' +
+    '<defs>' +
+    '<linearGradient id="pc-helmet" x1="0" y1="0" x2="1" y2="1">' +
+    '<stop offset="0" stop-color="#FFFFFF"/>' +
+    '<stop offset="1" stop-color="#DDE7F6"/>' +
+    "</linearGradient>" +
+    '<linearGradient id="pc-hoodie" x1="0" y1="0" x2="0" y2="1">' +
+    '<stop offset="0" stop-color="#2E4F82"/>' +
+    '<stop offset="1" stop-color="#142F54"/>' +
+    "</linearGradient>" +
+    "</defs>" +
+    '<g fill="none" stroke="none">' +
+    '<g id="pc-bot-float">' +
+    '<path d="M14 32c4-16 16-24 22-24h0c6 0 18 8 22 24" fill="url(#pc-hoodie)" opacity="0.95"/>' +
+    '<path d="M18 34c3-11 12-18 18-18s15 7 18 18" fill="rgba(255,255,255,0.08)"/>' +
+    '<circle cx="36" cy="34" r="16" fill="url(#pc-helmet)"/>' +
+    '<circle cx="36" cy="34" r="16" fill="none" stroke="rgba(20,47,84,0.25)" stroke-width="2"/>' +
+    '<rect x="24" y="28" width="24" height="14" rx="7" fill="#0B1D35" opacity="0.95"/>' +
+    '<circle id="pc-eye-left" cx="31" cy="35" r="3.6" fill="#7DD3FC"/>' +
+    '<circle id="pc-eye-right" cx="41" cy="35" r="3.6" fill="#7DD3FC"/>' +
+    '<circle cx="30" cy="33.8" r="1.1" fill="#FFFFFF" opacity="0.9"/>' +
+    '<circle cx="40" cy="33.8" r="1.1" fill="#FFFFFF" opacity="0.9"/>' +
+    '<path d="M33 41c2 2 4 2 6 0" stroke="#CFE0F5" stroke-width="2" stroke-linecap="round"/>' +
+    '<g id="pc-arm-wave" transform="translate(54,42)">' +
+    '<path d="M0 0c5 2 10 6 12 11" stroke="#EAF0F7" stroke-width="3" stroke-linecap="round"/>' +
+    '<path d="M12 11l5-2" stroke="#EAF0F7" stroke-width="3" stroke-linecap="round"/>' +
+    '<path d="M12 11l2 5" stroke="#EAF0F7" stroke-width="3" stroke-linecap="round"/>' +
     "</g>" +
-    '<path d="M20 34c4 4 8 6 12 6" opacity="0.6"/>' +
+    '<path d="M22 54c4-10 24-10 28 0" fill="rgba(255,255,255,0.10)"/>' +
+    '<g id="pc-hi-bubble" transform="translate(46,8)">' +
+    '<path d="M0 10c0-5 4-10 10-10h10c6 0 10 5 10 10v4c0 6-4 10-10 10h-6l-6 6v-6H10C4 24 0 20 0 14v-4z" fill="rgba(255,255,255,0.92)"/>' +
+    '<path d="M10 8v8" stroke="#142F54" stroke-width="3" stroke-linecap="round"/>' +
+    '<path d="M10 12h4" stroke="#142F54" stroke-width="3" stroke-linecap="round"/>' +
+    '<path d="M20 8v8" stroke="#142F54" stroke-width="3" stroke-linecap="round"/>' +
+    "</g>" +
+    "</g>" +
+    "</g>" +
     "</svg>" +
     "</button>" +
     '<div id="profile-chat-panel">' +
@@ -98,7 +116,7 @@
 
     // Convert bare URLs into links
     html = html.replace(
-      /(https?:\/\/[^\s<]+)/g,
+      /(https?:\/\/[^\s<">)]+)(?=[\s<")]|$)/g,
       function (url) {
         return (
           '<a class="profile-chat-link" href="' +
@@ -114,19 +132,24 @@
   }
 
   function mascotSvgMarkup() {
-    // Same SVG as the button mascot, smaller for message avatars.
     return (
-      '<svg viewBox="0 0 64 64" aria-hidden="true">' +
-      '<defs><linearGradient id="pc-hood-mini" x1="0" y1="0" x2="1" y2="1">' +
-      '<stop offset="0" stop-color="#EAF0F7"/>' +
-      '<stop offset="1" stop-color="#CFE0F5"/>' +
-      "</linearGradient></defs>" +
-      '<g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">' +
-      '<path d="M18 30c1-12 10-20 14-20h0c4 0 13 8 14 20" fill="url(#pc-hood-mini)" opacity="0.95"/>' +
-      '<circle cx="32" cy="30" r="10" fill="rgba(255,255,255,0.18)"/>' +
-      '<circle cx="28" cy="30" r="1.2" fill="currentColor" stroke="none"/>' +
-      '<circle cx="36" cy="30" r="1.2" fill="currentColor" stroke="none"/>' +
-      '<path d="M29 35c2 2 4 2 6 0" opacity="0.9"/>' +
+      '<svg viewBox="0 0 72 72" aria-hidden="true">' +
+      '<defs>' +
+      '<linearGradient id="pc-helmet-mini" x1="0" y1="0" x2="1" y2="1">' +
+      '<stop offset="0" stop-color="#FFFFFF"/>' +
+      '<stop offset="1" stop-color="#DDE7F6"/>' +
+      "</linearGradient>" +
+      '<linearGradient id="pc-hoodie-mini" x1="0" y1="0" x2="0" y2="1">' +
+      '<stop offset="0" stop-color="#2E4F82"/>' +
+      '<stop offset="1" stop-color="#142F54"/>' +
+      "</linearGradient>" +
+      "</defs>" +
+      '<g fill="none" stroke="none">' +
+      '<path d="M16 36c3-12 12-18 16-18h0c4 0 13 6 16 18" fill="url(#pc-hoodie-mini)" opacity="0.95"/>' +
+      '<circle cx="36" cy="36" r="14" fill="url(#pc-helmet-mini)"/>' +
+      '<rect x="26" y="31" width="20" height="12" rx="6" fill="#0B1D35" opacity="0.95"/>' +
+      '<circle cx="32" cy="37" r="3" fill="#7DD3FC"/>' +
+      '<circle cx="40" cy="37" r="3" fill="#7DD3FC"/>' +
       "</g></svg>"
     );
   }
