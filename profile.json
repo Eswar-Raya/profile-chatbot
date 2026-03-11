@@ -1,0 +1,102 @@
+{
+  "name": "Eswar Raviteja Rayavarapu",
+  "email": "eswar.rayavarapu23@gmail.com",
+  "phone": "+1 (551) 804-3753",
+  "location": "Jersey City, NJ",
+  "occupation": "Infrastructure & Cloud Transformation Technical Project Manager",
+  "company": "Community Dreams Foundation",
+  "bio": "Technical Project Manager with 10+ years of experience delivering enterprise infrastructure transformation, cloud migration, and large-scale platform modernization programs across global enterprise and telecom environments. Proven experience coordinating global engineering teams and executing multi-wave migration initiatives involving Linux platforms and hybrid cloud environments across AWS and Azure. Experienced in migration lifecycle governance, dependency discovery, migration planning, cutover execution, and executive program reporting.",
+  "education": [
+    "Master of Science – Information Systems, Stevens Institute of Technology",
+    "Bachelor of Technology – Electronics & Communication Engineering, Aditya Engineering College, JNTUK"
+  ],
+  "certifications": [
+    "Certified Scrum Master (Scrum Alliance)",
+    "SAFe Scrum Master (SSM)",
+    "Microsoft AZ-900",
+    "Oracle OCI Foundations"
+  ],
+  "skills": [
+    "Infrastructure Transformation Programs",
+    "Cloud Migration (Data Center → AWS / Hybrid Cloud)",
+    "Linux Platform Modernization (RHEL, SLES, CentOS)",
+    "Migration Wave Planning & Cutover Management",
+    "AWS (EC2, S3, IAM, VPC, CloudWatch)",
+    "Azure (VMs, Storage, NSG)",
+    "VMware vSphere, High Availability, Disaster Recovery",
+    "CloudEndure, VMware Replication, Carbonite Double-Take, Universal Discovery",
+    "Python, SQL (Pandas, Numpy, Scikit-learn, Streamlit), Bash/Shell Scripting",
+    "Power BI, Advanced Excel, JIRA, Confluence, MS Project, Git",
+    "AI: LangChain, RAG, Vector Databases (ChromaDB), Ollama, Model Validation"
+  ],
+  "interests": [
+    "AI-driven automation and analytics",
+    "Retrieval-Augmented Generation (RAG) systems",
+    "Infrastructure cost optimization",
+    "Community and nonprofit initiatives"
+  ],
+  "social_links": {
+    "linkedin": "LinkedIn profile",
+    "portfolio": "Portfolio"
+  },
+  "experience": [
+    {
+      "company": "Community Dreams Foundation",
+      "location": "Remote (USA)",
+      "period": "Dec 2025 – Present",
+      "role": "Volunteer Project Manager",
+      "highlights": ["Lead planning of community-focused initiatives", "Manage task allocation and stakeholder communication", "Define impact metrics and reporting frameworks"]
+    },
+    {
+      "company": "Savvy Global Technologies",
+      "location": "Remote (USA)",
+      "period": "July 2025 – Nov 2025",
+      "role": "Technical Project Manager | AI Innovation Program",
+      "highlights": ["Led AI-driven automation and analytics initiatives", "Improved delivery timelines by ~20% through sprint restructuring", "Developed executive dashboards for model outputs"]
+    },
+    {
+      "company": "DXC Technology (EIT Services India Pvt Ltd)",
+      "location": "India",
+      "period": "Feb 2020 – Dec 2023",
+      "role": "Technical Project Manager | Cloud & Infrastructure Programs",
+      "highlights": ["Directed programs involving 1000+ Linux servers", "Led Data Center → AWS migrations using CloudEndure", "Coordinated ~40 engineers globally", "Drove 15–20% infrastructure cost optimization", "Built Power BI dashboards for executive reporting"]
+    },
+    {
+      "company": "ADECCO Global",
+      "location": "India",
+      "period": "May 2019 – Jan 2020",
+      "role": "Sr. Linux Migration Engineer | HPI Tattoo Beyond Migration",
+      "highlights": ["Executed Linux migrations using vSphere Replication and Carbonite Double-Take", "Developed rollback strategies and post-migration validation"]
+    },
+    {
+      "company": "Ericsson India Global Services",
+      "location": "India",
+      "period": "Jun 2017 – Nov 2018",
+      "role": "Solution Integrator | T-Mobile SDG Platform",
+      "highlights": ["Managed telecom platform upgrades and security patch rollouts", "Coordinated UAT and production deployments"]
+    },
+    {
+      "company": "Huawei Technologies India",
+      "location": "India",
+      "period": "Oct 2016 – May 2017",
+      "role": "Sr. Technical Engineer | MTN SA Service Delivery Platform",
+      "highlights": ["Led telecom service onboarding and platform deployments", "Root cause analysis for production incidents"]
+    },
+    {
+      "company": "Tata Teleservices Ltd",
+      "location": "India",
+      "period": "Jun 2013 – Oct 2016",
+      "role": "Technical Engineer | TATA SDP, Device Management & DSTK Platform",
+      "highlights": ["Administered Linux environments for telecom platforms", "Implemented SNMP/CACTI monitoring", "Automated tasks with shell scripting"]
+    }
+  ],
+  "applied_ai_projects": [
+    "RAG System: Locally hosted pipeline using Python, ChromaDB, LangChain, Ollama with document ingestion, embeddings, vector indexing, and retrieval orchestration.",
+    "Hybrid Forecasting & Decision Support Model: Time-series models with prioritization rules and dashboard visualization for operational decision-making."
+  ],
+  "custom_facts": [
+    "10+ years of experience in infrastructure and cloud transformation",
+    "Experience with global engineering teams of ~40 engineers",
+    "Volunteer Project Manager at Community Dreams Foundation"
+  ]
+}

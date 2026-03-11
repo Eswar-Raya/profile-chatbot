@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Demo – Profile Chat Widget</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 600px; margin: 60px auto; padding: 20px; line-height: 1.6; }
+    h1 { color: #333; }
+    p { color: #555; }
+  </style>
+</head>
+<body>
+  <h1>Profile Chat Widget Demo</h1>
+  <p>This page simulates your public website. The chat icon appears in the bottom-right corner. Click it to ask questions about the profile.</p>
+  <p>Run the API on the same machine with: <code>uvicorn api:app --reload</code>, then open this file (or serve it from the same origin).</p>
+  <p>To embed on your real site, add one line (see README).</p>
+
+  <!-- When this page is served from your API (e.g. http://localhost:8000/demo), no data-api-url needed. -->
+  <!-- On your real site, use: data-api-url="https://your-api-domain.com" -->
+  <script src="/widget.js"></script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+# Render Blueprint for Profile Chatbot API
+# If you connect a repo that has this file at root, use "New Blueprint"; otherwise set the options below in the dashboard.
+services:
+  - type: web
+    name: profile-chat-api
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn api:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: WIDGET_ORIGINS
+        value: https://eswarrayavarapu.com,https://www.eswarrayavarapu.com
