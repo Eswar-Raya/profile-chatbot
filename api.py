@@ -83,6 +83,17 @@ def health():
     return {"status": "ok"}
 
 
+@app.get("/env-check")
+def env_check():
+    """Safe debug: report if OpenAI/Ollama is configured (no secrets)."""
+    key_set = bool(os.getenv("OPENAI_API_KEY", "").strip())
+    return {
+        "openai_configured": key_set,
+        "use_ollama": USE_OLLAMA,
+        "message": "OPENAI_API_KEY is set" if key_set else "OPENAI_API_KEY is missing or empty in this process",
+    }
+
+
 # Serve the embeddable widget and demo page
 STATIC_DIR = os.path.join(os.path.dirname(__file__), "static")
 
